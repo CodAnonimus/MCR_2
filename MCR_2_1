@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+void input_massiv(double arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        printf("Введіть елемент a[%d]: ", i + 1);
+        while (scanf("%lf", &arr[i]) != 1) {
+            while (getchar() != '\n');
+            printf("Будь ласка, введіть дійсне число для a[%d]: ", i + 1);
+        }
+    }
+}
+
+void print_massiv(double arr[], int size) {
+    printf("Масив: ");
+    for (int i = 0; i < size; i++) {
+        printf("%lf ", arr[i]);
+    }
+    printf("\n");
+}
+
+double calculate(double arr[], int size) {
+    double product = 1.0;
+    for (int i = 0; i < size; i++) {
+        product = product * arr[i];
+    }
+    return product;
+}
+
+int main() {
+    int n;
+
+    printf("Введіть кількість елементів масиву n (максимум 100): ");
+    while (scanf("%d", &n) != 1 || n <= 0 || n > 100) {
+        while (getchar() != '\n');
+        printf("Будь ласка, введіть натуральне число n (від 1 до 100): ");
+    }
+
+    double massiv[100];
+
+    input_massiv(massiv, n);
+    print_massiv(massiv, n);
+
+    double product = calculate(massiv, n);
+    printf("Добуток елементів масиву: %lf\n", product);
+
+    return 0;
+}
