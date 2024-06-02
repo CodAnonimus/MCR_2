@@ -13,7 +13,7 @@ void input_massiv(double arr[], int size) {
 void print_massiv(double arr[], int size) {
     printf("Масив: ");
     for (int i = 0; i < size; i++) {
-        printf("%lf ", arr[i]);
+        printf("%.2lf ", arr[i]);  // Виведення з округленням до 2 знаків після коми
     }
     printf("\n");
 }
@@ -41,7 +41,7 @@ int main() {
     print_massiv(massiv, n);
 
     double product = calculate(massiv, n);
-    printf("Добуток елементів масиву: %lf\n", product);
+    printf("Добуток елементів масиву: %.2lf\n", product);  // Виведення з округленням до 2 знаків після коми
 
     return 0;
 }
