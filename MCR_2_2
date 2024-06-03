@@ -1,1 +1,101 @@
+#include <stdio.h>
+#define MAX_SIZE 100
+
+// Функція для сортування масиву за спаданням
+void sorting(double arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (arr[i] < arr[j]) {
+                double temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+
+// Функція для порівняння елементів на k-ій позиції в двох масивах
+int compare_K(double arr1[], double arr2[], int k) {
+    if (arr1[k - 1] > arr2[k - 1]) {
+        return 1; // Елемент масиву a більший
+    } else if (arr1[k - 1] < arr2[k - 1]) {
+        return 2; // Елемент масиву b більший
+    } else {
+        return 0; // Елементи рівні
+    }
+}
+
+// Меню програми
+void menu() {
+    int n, k, choice;
+    double a[MAX_SIZE], b[MAX_SIZE];
+
+    do {
+        printf("Введіть кількість елементів в масиві (n, максимум %d): ", MAX_SIZE);
+        while (scanf("%d", &n) != 1 || n <= 0 || n > MAX_SIZE) {
+            printf("Помилка! Введіть натуральне число від 1 до %d.\n", MAX_SIZE);
+            while (getchar() != '\n'); // Очистити буфер вводу
+        }
+
+        printf("Введіть елементи масиву a:\n");
+        for (int i = 0; i < n; i++) {
+            while (scanf("%lf", &a[i]) != 1) {
+                printf("Помилка! Введіть число.\n");
+                while (getchar() != '\n'); // Очистити буфер вводу
+            }
+        }
+
+        printf("Введіть елементи масиву b:\n");
+        for (int i = 0; i < n; i++) {
+            while (scanf("%lf", &b[i]) != 1) {
+                printf("Помилка! Введіть число.\n");
+                while (getchar() != '\n'); // Очистити буфер вводу
+            }
+        }
+
+        sorting(a, n);
+        sorting(b, n);
+
+        printf("Відсортований масив a: ");
+        for (int i = 0; i < n; i++) {
+            printf("%.2lf ", a[i]);
+        }
+        printf("\n");
+
+        printf("Відсортований масив b: ");
+        for (int i = 0; i < n; i++) {
+            printf("%.2lf ", b[i]);
+        }
+        printf("\n");
+
+        printf("Введіть значення k для порівняння: ");
+        while (scanf("%d", &k) != 1 || k < 1 || k > n) {
+            printf("Помилка! Введіть натуральне число від 1 до %d.\n", n);
+            while (getchar() != '\n'); // Очистити буфер вводу
+        }
+
+        int result = compare_K(a, b, k);
+        if (result == 1) {
+            printf("Елемент масиву a на %d-му місці більший.\n", k);
+        } else if (result == 2) {
+            printf("Елемент масиву b на %d-му місці більший.\n", k);
+        } else {
+            printf("Елементи на %d-му місці рівні.\n", k);
+        }
+
+        printf("Натисніть 1 щоб почати спочатку, 0 щоб завершити: ");
+        while (scanf("%d", &choice) != 1 || (choice != 0 && choice != 1)) {
+            printf("Помилка! Введіть 0 або 1.\n");
+            while (getchar() != '\n'); // Очистити буфер вводу
+        }
+    } while (choice == 1);
+
+    printf("Програма завершена.\n");
+}
+
+// Головна функція
+int main() {
+    menu();
+    return 0;
+}
 
